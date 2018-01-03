@@ -14,8 +14,6 @@ import com.popularpenguin.jokelib.JokeProvider;
 
 import java.util.List;
 
-import javax.inject.Named;
-
 /** An endpoint class we are exposing */
 @Api(
         name = "myApi",

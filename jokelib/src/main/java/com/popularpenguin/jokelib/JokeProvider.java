@@ -10,7 +10,7 @@ public class JokeProvider {
     public JokeProvider() {
         jokes = new ArrayList<>();
 
-        jokes.add(new Joke("Why did the chicken cross the road?", "To get to the other side!"));
+        jokes.add(new Joke("Why did the chicken cross the road?\n\nTo get to the other side!"));
     }
 
     public Joke getJoke(int index) {

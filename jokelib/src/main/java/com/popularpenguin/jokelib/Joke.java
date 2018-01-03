@@ -1,27 +1,22 @@
 package com.popularpenguin.jokelib;
 
-/** Joke class contains both parts of a joke */
 public class Joke {
+    private String joke;
 
-    private String story;
-    private String punchline;
-
-    Joke(String story, String punchline) {
-        this.story = story;
-        this.punchline = punchline;
+    public Joke(String joke) {
+        this.joke = joke;
     }
 
-    public String getStory() {
-        return story;
+    public String getJoke() {
+        return joke;
     }
 
-    public String getPunchline() {
-        return punchline;
+    public void setJoke(String joke) {
+        this.joke = joke;
     }
 
     @Override
     public String toString() {
-        return String.format("%s%n%n%s", story, punchline);
+        return joke;
     }
 }
-
