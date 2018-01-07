@@ -74,7 +74,7 @@ public class EndpointsAsyncTask extends AsyncTask<Void, Integer, String> {
             return jokes.get(randomIndex).toString();
         }
         catch (IOException e) {
-            return "Unable to fetch joke";
+            return context.getResources().getString(R.string.error_joke);
         }
     }
 }
