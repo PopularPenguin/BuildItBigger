@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -16,7 +15,7 @@ import com.udacity.gradle.builditbigger.backend.myApi.model.Joke;
 
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, Joke>, Void, Joke> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Integer, Joke> {
     private static MyApi myApiService = null;
     private Context context;
 
@@ -25,7 +24,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, Joke>, Void, Joke> {
     }
 
     @Override
-    protected Joke doInBackground(Pair<Context, Joke>... params) {
+    protected Joke doInBackground(Void... voids) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -44,11 +43,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, Joke>, Void, Joke> {
             myApiService = builder.build();
         }
 
-        //context = params[0].first;
-        //String name = params[0].second;
-
         try {
-            //return myApiService.getJokes().execute().getData();
             return myApiService.getJokes().execute().getItems().get(0);
         } catch (IOException e) {
             return null;
