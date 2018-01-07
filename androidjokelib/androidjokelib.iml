@@ -136,7 +136,5 @@
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
     <orderEntry type="module" module-name="jokelib" />
     <orderEntry type="library" name="android-android-26" level="project" />
-    <orderEntry type="module" module-name="jokelib" />
-    <orderEntry type="module" module-name="jokelib" />
   </component>
 </module>

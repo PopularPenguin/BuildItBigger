@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,16 +38,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        /*
-        JokeProvider jokeProvider = new JokeProvider();
-        Joke joke = jokeProvider.getJoke(0);
+        ProgressBar spinner = findViewById(R.id.pb_spinner);
+        spinner.setVisibility(View.VISIBLE);
 
-        Intent intent = new Intent(this, JokeActivity.class);
-        intent.putExtra("joke", joke.toString());
-        startActivity(intent); */
-
-        new EndpointsAsyncTask(this).execute();
+        new EndpointsAsyncTask(this, spinner).execute();
     }
-
-
 }

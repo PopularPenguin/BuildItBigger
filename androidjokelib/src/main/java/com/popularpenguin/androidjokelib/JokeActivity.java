@@ -20,7 +20,7 @@ public class JokeActivity extends AppCompatActivity {
 
     private void displayJoke() {
         String jokeString = getIntent().getStringExtra("joke");
-        JSONObject jokeJson = null;
+        JSONObject jokeJson;
         String joke = "";
 
         try {

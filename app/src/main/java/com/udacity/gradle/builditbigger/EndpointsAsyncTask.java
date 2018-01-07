@@ -3,6 +3,8 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -14,17 +16,21 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import com.udacity.gradle.builditbigger.backend.myApi.model.Joke;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
-public class EndpointsAsyncTask extends AsyncTask<Void, Integer, Joke> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Integer, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private ProgressBar mSpinner;
 
-    public EndpointsAsyncTask(Context context) {
+    EndpointsAsyncTask(Context context, ProgressBar spinner) {
         this.context = context;
+        mSpinner = spinner;
     }
 
     @Override
-    protected Joke doInBackground(Void... voids) {
+    protected String doInBackground(Void... voids) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -43,19 +49,32 @@ public class EndpointsAsyncTask extends AsyncTask<Void, Integer, Joke> {
             myApiService = builder.build();
         }
 
-        try {
-            return myApiService.getJokes().execute().getItems().get(0);
-        } catch (IOException e) {
-            return null;
-        }
+        return getJoke();
     }
 
     @Override
-    protected void onPostExecute(Joke result) {
-        // Launch new android lib activity
+    protected void onPostExecute(String result) {
+        mSpinner.setVisibility(View.GONE);
 
+        // Launch new android lib activity
         Intent intent = new Intent(context, JokeActivity.class);
-        intent.putExtra("joke", result.toString());
+        intent.putExtra("joke", result);
         context.startActivity(intent);
+
+        context = null;
+        mSpinner = null;
+    }
+
+    /** Get a random joke from the cloud */
+    private String getJoke() {
+        try {
+            List<Joke> jokes = myApiService.getJokes().execute().getItems();
+            int randomIndex = new Random().nextInt(jokes.size());
+
+            return jokes.get(randomIndex).toString();
+        }
+        catch (IOException e) {
+            return "Unable to fetch joke";
+        }
     }
 }
