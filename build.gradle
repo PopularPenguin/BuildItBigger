@@ -19,3 +19,29 @@ allprojects {
         google()
     }
 }
+
+// GCE tasks, run 'runTests' from command line
+task runTests {
+    dependsOn("startEndpoints")
+    dependsOn("executeTests")
+    dependsOn("stopEndpoints")
+}
+
+// from https://stackoverflow.com/questions/31434928/android-gradle-task-google-appengine
+task startEndpoints (dependsOn: ":backend:appengineRun") {
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+
+    doLast {
+        println "Server started!"
+    }
+}
+
+task executeTests (dependsOn: ":app:connectedAndroidTest") {
+    mustRunAfter "startEndpoints"
+}
+
+task stopEndpoints (dependsOn: ":backend:appengineStop") {
+    mustRunAfter "executeTests"
+}
