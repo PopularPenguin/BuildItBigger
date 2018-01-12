@@ -207,11 +207,5 @@
     <orderEntry type="module" module-name="androidjokelib" />
     <orderEntry type="module" module-name="jokelib" />
     <orderEntry type="library" name="android-android-26" level="project" />
-    <orderEntry type="module" module-name="backend" />
-    <orderEntry type="module" module-name="androidjokelib" />
-    <orderEntry type="module" module-name="jokelib" />
-    <orderEntry type="module" module-name="backend" />
-    <orderEntry type="module" module-name="androidjokelib" />
-    <orderEntry type="module" module-name="jokelib" />
   </component>
 </module>

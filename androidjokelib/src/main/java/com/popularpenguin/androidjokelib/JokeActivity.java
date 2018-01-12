@@ -4,9 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /** Activity to display the joke */
 public class JokeActivity extends AppCompatActivity {
 
