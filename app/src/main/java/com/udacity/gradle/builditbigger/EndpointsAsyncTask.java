@@ -3,6 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -13,13 +14,10 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.popularpenguin.androidjokelib.JokeActivity;
 
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
-import com.udacity.gradle.builditbigger.backend.myApi.model.Joke;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
 
-public class EndpointsAsyncTask extends AsyncTask<Void, Integer, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
     private ProgressBar mSpinner;
@@ -68,10 +66,8 @@ public class EndpointsAsyncTask extends AsyncTask<Void, Integer, String> {
     /** Get a random joke from the cloud */
     private String getJoke() {
         try {
-            List<Joke> jokes = myApiService.getJokes().execute().getItems();
-            int randomIndex = new Random().nextInt(jokes.size());
-
-            return jokes.get(randomIndex).toString();
+            Log.d("Endpoints", myApiService.getJoke().execute().getJoke());
+            return myApiService.getJoke().execute().getJoke();
         }
         catch (IOException e) {
             return context.getResources().getString(R.string.error_joke);

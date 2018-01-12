@@ -2,6 +2,7 @@ package com.popularpenguin.jokelib;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /** Class that provides a list of Jokes to display */
 public class JokeProvider {
@@ -19,12 +20,18 @@ public class JokeProvider {
         jokes.add(new Joke("What is Jesus's favorite fitness program?\n\nCrossfit!"));
     }
 
-    public Joke getJoke(int index) {
-        return jokes.get(index);
+    public String getJoke(int index) {
+        return jokes.get(index).toString();
     }
 
     public List<Joke> getJokes() {
         return jokes;
+    }
+
+    public String getRandomJokeString() {
+        int randomIndex = new Random().nextInt(jokes.size());
+
+        return getJoke(randomIndex);
     }
 }
 

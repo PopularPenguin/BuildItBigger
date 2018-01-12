@@ -20,19 +20,9 @@ public class JokeActivity extends AppCompatActivity {
 
     private void displayJoke() {
         String jokeString = getIntent().getStringExtra("joke");
-        JSONObject jokeJson;
-        String joke = "";
-
-        try {
-            jokeJson = new JSONObject(jokeString);
-            joke = jokeJson.getString("joke");
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         TextView jokeView = findViewById(R.id.tv_joke);
-        jokeView.setText(joke);
+        jokeView.setText(jokeString);
     }
 }
 
