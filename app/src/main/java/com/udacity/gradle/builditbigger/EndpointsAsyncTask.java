@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -66,7 +65,6 @@ public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     /** Get a random joke from the cloud */
     private String getJoke() {
         try {
-            Log.d("Endpoints", myApiService.getJoke().execute().getJoke());
             return myApiService.getJoke().execute().getJoke();
         }
         catch (IOException e) {
